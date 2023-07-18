@@ -36,12 +36,12 @@ namespace Trees.BinaryTrees.BBTree.Concrete
             throw new NotImplementedException();
         }
 
-        public void Remove(INode<T> value)
+        public void Remove(IBinaryNode<T> value)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(T value)
+        public void RemoveFirst(T value)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +51,7 @@ namespace Trees.BinaryTrees.BBTree.Concrete
             throw new NotImplementedException();
         }
 
-        public void RemoveAll(INode<T> value)
+        public void RemoveAll(IBinaryNode<T> value)
         {
             throw new NotImplementedException();
         }

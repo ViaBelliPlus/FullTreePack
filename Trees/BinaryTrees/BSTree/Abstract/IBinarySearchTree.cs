@@ -19,7 +19,7 @@ namespace Trees.BinaryTrees.BSTree.Abstract
         int MaxDepht(IBinaryNode<T> root);
         IBinaryNode<T> DeepNode();
         void ToDrawAllPaths();
-        Queue<IBinaryNode<T>> FindPath(IBinaryNode<T> findedRoot);
+        List<IBinaryNode<T>> FindPath(IBinaryNode<T> findedRoot);
         /// <summary>
         /// Verilen degerın en son nodunu döner
         /// </summary>
@@ -33,13 +33,12 @@ namespace Trees.BinaryTrees.BSTree.Abstract
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         List<IBinaryNode<T>> FindRootAll(T value);
-       bool FindRoot(IBinaryNode<T> node);
+        bool FindRoot(IBinaryNode<T> node);
         /// <summary>
         /// Verilen değerin nodunu verir
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         IBinaryNode<T> FindRootFirst(T value);
-
     }
 }

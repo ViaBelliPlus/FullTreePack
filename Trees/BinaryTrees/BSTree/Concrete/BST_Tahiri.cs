@@ -38,15 +38,15 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             var Q = new Queue<IBinaryNode<T>>(); // Kuyruk yapısına ekleme yaparak aşağı doğru ekleyeceğiz
             Q.Enqueue(Root);
             IBinaryNode<T> temp = null; //Boş bir değişken
-            while(Q.Count > 0) //Kurukta kontrol edilecek değer kalmayınca döngü durur.
+            while (Q.Count > 0) //Kurukta kontrol edilecek değer kalmayınca döngü durur.
             {
                 temp = Q.Dequeue(); // Burada kuyruğa eklenmiş ilk değeri çıkartıyoruz.
                 //Daha sonra sağını ve solunu kontrol ediyoruz.
-                if(temp.Left != null)
+                if (temp.Left != null)
                 {
                     Q.Enqueue(temp.Left); //Null değilse kuyruğa kontrol yapmak için ekliyoruz.
                 }
-                if(temp.Right != null)
+                if (temp.Right != null)
                 {
                     Q.Enqueue(temp.Right);
                 }
@@ -66,13 +66,13 @@ namespace Trees.BinaryTrees.BSTree.Concrete
         //O(long(n))
         public bool FindRoot(IBinaryNode<T> node)
         {
-            Validate(node); 
+            Validate(node);
             var ptr = Root;
-            while(ptr != node) //Node ve arama pointerımız eşit ise döngü sonlanır.
+            while (ptr != node) //Node ve arama pointerımız eşit ise döngü sonlanır.
             {
                 if (ptr == null) return false; //ptr null olduğu halde hala döngü sonlanmadıysa o zaman böyle bir node yoktur.
 
-                if(node.Value.CompareTo(ptr.Value) < 0) //Değerlerini kontrol ederek sağa veya sola doğru hareket ediyoruz.
+                if (node.Value.CompareTo(ptr.Value) < 0) //Değerlerini kontrol ederek sağa veya sola doğru hareket ediyoruz.
                 {
                     ptr = ptr.Left;
                 }
@@ -84,30 +84,29 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             return true; //Döngü düzgün bir şekilde sonlandıysa node ilgili ağaçta vardır.
         }
         //O(log(n))
-        public Queue<IBinaryNode<T>> FindPath(IBinaryNode<T> findedRoot)
+        public List<IBinaryNode<T>> FindPath(IBinaryNode<T> findedRoot)
         {
             Validate(findedRoot);
             var ptr = Root;
-            var Q = new Queue<IBinaryNode<T>>(); //Kuruğa ilgili path'i ekleyeceğiz ekleyeceğiz.
-            Q.Enqueue(Root);
-            while (ptr != findedRoot) //Node ve arama pointerımız eşit ise döngü sonlanır.
+            var Q = new List<IBinaryNode<T>>(); //Kuruğa ilgili path'i ekleyeceğiz ekleyeceğiz.
+            Q.Add(Root);
+            while (!ptr.Equals(findedRoot)) //Node ve arama pointerımız eşit ise döngü sonlanır.
             {
                 if (ptr == null) throw new ArgumentException(ErrorMessages.MissingValueMessage); //ptr null olduğu halde hala döngü sonlanmadıysa o zaman böyle bir node yoktur.
 
                 if (findedRoot.Value.CompareTo(ptr.Value) < 0) //Değerlerini kontrol ederek sağa veya sola doğru hareket ediyoruz.
                 {
-                    Q.Enqueue(ptr.Left); //
+                    Q.Add(ptr.Left); //
                     ptr = ptr.Left;
                 }
                 else
                 {
-                    Q.Enqueue(ptr.Right);
+                    Q.Add(ptr.Right);
                     ptr = ptr.Right;
                 }
             }
             return Q;
         }
-
         public int MaxDepht(IBinaryNode<T> root) //Recursive mantıkla çalışır!
         {
             if (root == null) return 0;
@@ -117,31 +116,63 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             return (leftDepht > rightDepht) ? leftDepht + 1 : rightDepht + 1;
         }
 
-        public void Remove(INode<T> value)
+        public void Remove(IBinaryNode<T> value)
         {
-            throw new NotImplementedException();
+            Validate(value);
+            if (FindRoot(value))
+            {
+                if (value.Right == null && value.Left == null)
+                {
+                    var Q = FindPath(value);
+                    var temp = Q[Q.Count - 1];
+                    var temp2 = Q[Q.Count - 2];
+                    if (temp2.Right != null && temp2.Right.Equals(temp))
+                    {
+                        temp2.Right = null;
+                    }
+                    else
+                    {
+                        temp2.Left = null;
+                    }
+                }
+                else
+                {
+                    IBinaryNode<T> removedRoot = FindMinRoot(value.Right);
+                    value.Value = removedRoot.Value;
+                    Remove(removedRoot);
+                }
+            }
         }
-
-        public void Remove(T value)
+        private IBinaryNode<T> FindMinRoot(IBinaryNode<T> root)
         {
-            throw new NotImplementedException();
+            IBinaryNode<T> current = root;
+            while (current.Left != null) //sol taraf null olana kadar ılerle
+            {
+                current = current.Left;//curentı bı sola at
+            }
+            return current; //currentın valusunu gonder
         }
-        public void RemoveAll(INode<T> value)
+        public void RemoveFirst(T value)
         {
-            throw new NotImplementedException();
+            Validate(value);
+            Remove(FindRootFirst(value));
         }
-
         public void RemoveRange(List<T> values)
         {
-            throw new NotImplementedException();
-        }
-        private void Validate(object? obj)
-        {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-        }
-        private void Validate(object? obj, object? obj2)
-        {
-            if (obj == null || obj2 == null) throw new ArgumentNullException(nameof(obj2));
+            foreach (T value in values)
+            {
+                if (FindRootFirst(value) != null)
+                    RemoveFirst(value);
+            }
         }
     }
+    private void Validate(object? obj)
+    {
+        if (obj == null) throw new ArgumentNullException(nameof(obj));
+    }
+    private void Validate(object? obj, object? obj2)
+    {
+        if (obj == null || obj2 == null) throw new ArgumentNullException(nameof(obj2));
+    }
+}
 }

@@ -166,6 +166,17 @@ namespace Trees.BinaryTrees.BSTree.Concrete
         }
         public void RemoveAll(T value)
         {
+            //Yanlışlıkla bunu yazmışım istersen sil başka bir algo kullan!
+            //Validate(value);
+            //var S = new Stack<IBinaryNode<T>>();
+            //foreach (var item in FindRootAll(value))
+            //{
+            //    S.Push(item);
+            //}
+            //foreach (IBinaryNode<T> item in S)
+            //{
+            //    Remove(item);
+            //}
             throw new NotImplementedException();
         }
 

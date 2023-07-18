@@ -21,11 +21,9 @@ namespace Trees.BinaryTrees
         /// </summary>
         /// <param name="values"></param>
         void AddRange(List<T> values);
-        void Remove(INode<T> value);
-        void Remove(T value);
+        void Remove(IBinaryNode<T> value);
+        void RemoveFirst(T value);
         void RemoveAll(T value);
-        void RemoveAll(INode<T> value);
-
         void RemoveRange(List<T> values);
         /// <summary>
         /// Bu methot çalıştırılır ise ağac komple silinecektir

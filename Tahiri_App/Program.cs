@@ -3,10 +3,23 @@ BST<int> intss = new();
 intss.Add(11);
 BST<int> ints = new();
 ints.Add(100);
+ints.Add(220);
+ints.Add(100);
 ints.Add(2);
+ints.Add(1);
 ints.Add(10);
 ints.Add(11);
 ints.Add(200);
+ints.Add(150);
+ints.Add(170);
+ints.Add(190);
+ints.Add(110);
+ints.Add(410);
+ints.Add(220);
+ints.Add(220);
+ints.Add(210);
+ints.Add(280);
+ints.Add(297);
 ints.Add(210);
 ints.Add(500);
 ints.Add(90);
@@ -20,6 +33,7 @@ var max = ints.FindMax();
 #region FindRoot() Kontrol
 bool ctr = ints.FindRoot(intss.Root);
 #endregion
+ints.RemoveFirst(2);
 #region FindPath Kontrol
 var path = ints.FindPath(deep);
 #endregion
