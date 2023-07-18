@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="BinaryTrees\AVLTree\Concrete\" />
+    <Folder Include="BinaryTrees\AVLTree\Abstract\" />
+    <Folder Include="Trie\CurseFindTree\Abstract\" />
+    <Folder Include="Trie\CurseFindTree\Concrete\" />
+    <Folder Include="Trie\SearchEngineTree\Abstract\" />
+    <Folder Include="Trie\SearchEngineTree\Concrete\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="UtilitiesForBackEnd" Version="1.0.2" />
+  </ItemGroup>
+
+</Project>
