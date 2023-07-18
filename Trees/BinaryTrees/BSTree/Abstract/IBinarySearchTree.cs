@@ -39,7 +39,7 @@ namespace Trees.BinaryTrees.BSTree.Abstract
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        INode<T> FindRootFirst(T value);
+        IBinaryNode<T> FindRootFirst(T value);
 
     }
 }

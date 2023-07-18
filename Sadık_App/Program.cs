@@ -22,8 +22,9 @@ s.Add(115);
 s.Add(55);
 
 
+s.RemoveAll(90);
 
-BinaryTree<int>.LevelOrderNR(s.Root).ForEach(i => Console.Write($"{i,-5}"));
+BinaryTree<int>.InOrderNR(s.Root).ForEach(i=>Console.Write($"{i,-5}"));
 
 Console.WriteLine();
 

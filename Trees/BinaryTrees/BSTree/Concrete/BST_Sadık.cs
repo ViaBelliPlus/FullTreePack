@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -138,9 +139,9 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             return data[0];
         }
 
-        public INode<T> FindRootFirst(T value)
+        public IBinaryNode<T> FindRootFirst(T value)
         {
-            if(value == null) throw new ArgumentNullException();
+            if (value == null) throw new ArgumentNullException();
             var current = Root;
             while (value.CompareTo(current.Value) != 0) //eşit değil ise gir
             {
@@ -160,14 +161,115 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             return current;
         }
 
+
         public void ToDrawAllPaths()
         {
-            throw new NotImplementedException();
+            if (Root == null) throw new ArgumentNullException();
+            var path = new T[256];  //dedgerlerı tutucak dızı 
+            PrintPath(Root, path, 0);
         }
+
+        private void PrintPath(IBinaryNode<T> root, T[] path, int len)
+        {
+            if (root == null)
+            {
+                return; //root null ıse gerı doncez
+            }
+            path[len] = root.Value; //diziye degerleri atıyoruz
+            len++; //1 artırdık bı sonrakı degerı eklemek için
+            if (root.Left == null && root.Right == null)
+            {
+                //yaprak ise yazdırmaya git
+                PrintArray(path, len);
+            }
+            else //yaptak degil ise 
+            {
+                PrintPath(root.Left, path, len); //ilk sola git diziyi ve uzunlugu da götür 
+                PrintPath(root.Right, path, len); //sonra aynı sekilde sağa git 
+            }
+        }
+        private void PrintArray(T[] path, int len) //gelen pathi yazdırır
+        {
+            for (int l = 0; l < len; l++)
+            {
+                Console.Write($"{path[l],-5}");
+            }
+            Console.WriteLine("");
+        }
+
+
+
         public void RemoveAll(T value)
         {
-            throw new NotImplementedException();
+            while (true)
+            {
+                var data = FindRootFirst(value);
+                if (data != null)
+                {
+                    DeleteNode(Root, value);
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
+
+        private IBinaryNode<T> DeleteNode(IBinaryNode<T> root, T value)
+        {
+            if (root == null)
+                return null;
+
+            // Değeri aranan düğümü bul
+            if (value.CompareTo(root.Value) < 0) //deger kucuk ıse sola gıt
+            {
+                root.Left = DeleteNode(root.Left, value);
+            }
+            else if (value.CompareTo(root.Value) > 0)//deger buyuk ıse saga gıt
+            {
+                root.Right = DeleteNode(root.Right, value);
+            }
+            else
+            {
+                // Silinecek düğüm bulundu
+
+                // Durum 1: Yaprak düğüm
+                if (root.Left == null && root.Right == null)
+                {
+                    root = null;
+                }
+                // Durum 2: Tek çocuklu düğüm
+                else if (root.Left == null) //solu null ıse sağını döndür
+                {
+                    root = root.Right; //burada solu olmadıgı ıcın drekt olarak sağındaki ilk elemanı göndeririz
+                }
+                else if (root.Right == null) //sagı null ıse solu dondur
+                {
+                    root = root.Left;//burada sağı olmadıgı ıcın drekt olarak solundaki ilk elemanı göndeririz
+                }
+                // Durum 3: İki çocuklu düğüm
+                else
+                {
+                    var successor = FindMinimum(root.Right); // Sağ alt ağacın en küçük değerli düğümü bul
+
+                    root.Value = successor.Value; // Silinecek düğümün değerini kucukdeger ile güncelle
+                    root.Right = DeleteNode(root.Right, successor.Value); // degeri değiştirileni agacın kokunu kuculterek sileriz çünkü asıl sılınmek ıstenılenın altındak min değeri bulduk ve onun değerini ona kopyaladık aynı gederden 2 tane var o yuzden 
+                }
+            }
+
+            return root;
+        }
+
+        private IBinaryNode<T> FindMinimum(IBinaryNode<T> node)
+        {
+            while (node.Left != null)
+            {
+                node = node.Left;
+            }
+
+            return node;
+        }
+
 
         public IEnumerator<T> GetEnumerator()
         {
