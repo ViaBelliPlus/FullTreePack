@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Channels;
+﻿using System.Threading.Channels;
 using Trees.BinaryTrees.BaseBT.Concrete;
 using Trees.BinaryTrees.BSTree.Concrete;
 using Trees.BinaryTrees.Node.Concrete;
@@ -21,7 +20,7 @@ s.Add(65);
 s.Add(115);
 s.Add(55);
 
-
+var a = s.FindRootDepht(90);
 
 BinaryTree<int>.LevelOrderNR(s.Root).ForEach(i => Console.Write($"{i,-5}"));
 

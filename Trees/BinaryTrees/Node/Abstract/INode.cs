@@ -8,5 +8,6 @@ namespace Trees.BinaryTrees.Node.Abstract
 {
     public interface INode<T>
     {
+
     }
 }

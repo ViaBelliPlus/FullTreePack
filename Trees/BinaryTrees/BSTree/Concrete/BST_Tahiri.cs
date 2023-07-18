@@ -1,4 +1,4 @@
-﻿using Core.Utilities.ErrorMessages;
+﻿using Core.Utilities.Messages;
 using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
@@ -89,9 +89,10 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             Validate(findedRoot);
             var ptr = Root;
             var Q = new Queue<IBinaryNode<T>>(); //Kuruğa ilgili path'i ekleyeceğiz ekleyeceğiz.
+            Q.Enqueue(Root);
             while (ptr != findedRoot) //Node ve arama pointerımız eşit ise döngü sonlanır.
             {
-                if (ptr == null) throw new ArgumentException(ErrorMessages.MissingNodeMessage); //ptr null olduğu halde hala döngü sonlanmadıysa o zaman böyle bir node yoktur.
+                if (ptr == null) throw new ArgumentException(ErrorMessages.MissingValueMessage); //ptr null olduğu halde hala döngü sonlanmadıysa o zaman böyle bir node yoktur.
 
                 if (findedRoot.Value.CompareTo(ptr.Value) < 0) //Değerlerini kontrol ederek sağa veya sola doğru hareket ediyoruz.
                 {

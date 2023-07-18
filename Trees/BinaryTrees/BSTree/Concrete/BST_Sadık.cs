@@ -138,7 +138,7 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             return data[0];
         }
 
-        public INode<T> FindRootFirst(T value)
+        public IBinaryNode<T> FindRootFirst(T value)
         {
             if(value == null) throw new ArgumentNullException();
             var current = Root;
