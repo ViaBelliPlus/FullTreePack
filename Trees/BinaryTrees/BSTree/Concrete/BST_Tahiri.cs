@@ -163,16 +163,16 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             {
                 if (FindRootFirst(value) != null)
                     RemoveFirst(value);
+
             }
         }
+        private void Validate(object? obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+        }
+        private void Validate(object? obj, object? obj2)
+        {
+            if (obj == null || obj2 == null) throw new ArgumentNullException(nameof(obj2));
+        }
     }
-    private void Validate(object? obj)
-    {
-        if (obj == null) throw new ArgumentNullException(nameof(obj));
-    }
-    private void Validate(object? obj, object? obj2)
-    {
-        if (obj == null || obj2 == null) throw new ArgumentNullException(nameof(obj2));
-    }
-}
 }
