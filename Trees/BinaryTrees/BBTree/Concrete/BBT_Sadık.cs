@@ -9,59 +9,64 @@ using Trees.BinaryTrees.Node.Abstract;
 
 namespace Trees.BinaryTrees.BBTree.Concrete
 {
-    public partial class BBT<T> /*: IBinaryBalanceTree<T>*/ where T : IComparable
+    public partial class BBT<T> : IBinaryBalanceTree<T> where T : IComparable
     {
-        public IResult Add(T value)
+        public void Add(T value)
         {
             throw new NotImplementedException();
         }
 
-        public IResult AddRange(List<T> values)
+        public void AddRange(List<T> values)
         {
             throw new NotImplementedException();
         }
 
-        public IResult Clear()
+        public void Clear()
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<T> GetBalance()
+        public T GetBalance()
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<T> LeftRotation()
+        public T LeftRotation()
         {
             throw new NotImplementedException();
         }
 
-        public IResult Remove(INode<T> value)
+        public void Remove(INode<T> value)
         {
             throw new NotImplementedException();
         }
 
-        public IResult Remove(T value)
+        public void Remove(T value)
         {
             throw new NotImplementedException();
         }
 
-        public IResult RemoveAll(T value)
+        public void RemoveAll(T value)
         {
             throw new NotImplementedException();
         }
 
-        public IResult RemoveAll(INode<T> value)
+        public void RemoveAll(INode<T> value)
         {
             throw new NotImplementedException();
         }
 
-        public IResult RemoveRange(List<T> values)
+        public void RemoveRange(List<T> values)
         {
             throw new NotImplementedException();
         }
 
         public T RightRotation()
+        {
+            throw new NotImplementedException();
+        }
+
+        T IBinaryBalanceTree<T>.FindMax()
         {
             throw new NotImplementedException();
         }

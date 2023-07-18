@@ -13,12 +13,12 @@ namespace Trees.BinaryTrees.BSTree.Abstract
         T FindMax();
         T FindMin();
         int MaxDepht(IBinaryNode<T> root);
-        INode<T> DeepNode(IBinaryNode<T> root);
+        IBinaryNode<T> DeepNode();
         void ToDrawAllPaths();
-        INode<T> FindPath(INode<T> findedRoot);
+        Queue<IBinaryNode<T>> FindPath(IBinaryNode<T> findedRoot);
         INode<T> FindRootDepht(T value);
         List<INode<T>> FindRootAll(T value);
-        bool FindRoot(INode<T> node);
+        bool FindRoot(IBinaryNode<T> node);
         INode<T> FindRootFirst(T value);
 
     }
