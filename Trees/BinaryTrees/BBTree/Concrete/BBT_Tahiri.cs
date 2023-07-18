@@ -13,5 +13,6 @@ namespace Trees.BinaryTrees.BBTree.Concrete
         {
             throw new NotImplementedException();
         }
+       
     }
 }
