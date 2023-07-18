@@ -6,36 +6,33 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Trees.BinaryTrees.BaseBT.Concrete;
 using Trees.BinaryTrees.BSTree.Abstract;
 using Trees.BinaryTrees.Node.Abstract;
 using Trees.BinaryTrees.Node.Concrete;
 
 namespace Trees.BinaryTrees.BSTree.Concrete
 {
-    public partial class BST<T> : IBinarySearchTree<T>,IEnumerable<T> where T : IComparable
+    public partial class BST<T> : IBinarySearchTree<T>, IEnumerable<T> where T : IComparable
     {
         public IBinaryNode<T> Root { get; set; }
         public BST()
         {
-            Root = null; 
+            Root = null;
         }
-        public BST(IEnumerable<T> collection):this()
+        public BST(IEnumerable<T> collection) : this()
         {
             foreach (var item in collection)
             {
                 Add(item);
             }
         }
-        /// <summary>
-        /// Verilen T tipindeki değeri ağaca uygun şekilde ekler
-        /// </summary>
-        /// <param name="value"></param>
-        /// <exception cref="ArgumentNullException"></exception>
+
         public void Add(T value)
         {
             if (value == null) throw new ArgumentNullException();
-            var newNode = new BSTNode<T>(value); 
-            
+            var newNode = new BSTNode<T>(value);
+
             if (Root == null) //hiç eleman yok ise buraya koyarız
             {
                 Root = newNode;
@@ -50,13 +47,7 @@ namespace Trees.BinaryTrees.BSTree.Concrete
 
                     //sol - alt agac
                     if (value.CompareTo(current.Value) < 0) //kucuk deger
-                    {/*
-                      CompareTo() içine gelen ile değeri karsılastırır
-                        içine gelen değer:
-                        küçük ise -1
-                        büyük ise +1
-                        eşit ise 0 döner
-                      */
+                    {
                         current = current.Left; //burada currentın degerını curentin solu yaptık currentın degerı gitti ama parent tutuyor 
                         if (current == null) //boşpozisyon aranıyor current boş ise girer boş değilse wher bidaha döner boş yer buluncaya kadar
                         {
@@ -65,7 +56,7 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                         }
                     }
                     //sağ - alt agac
-                    else
+                    else //burada eşit değerler sağ tarafa eklendi
                     {
                         current = current.Right; //saga kayıyoruz burada 
                         if (current == null) //boş pozisyon gelince gireriz
@@ -77,25 +68,18 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                 }
             }
         }
-
-        /// <summary>
-        /// Gelen T Listesindeki elemanları uygun yerlere yerleştirir
-        /// </summary>
-        /// <param name="values"></param>
         public void AddRange(List<T> values)
         {
+            if (values == null) throw new ArgumentNullException();
             foreach (var item in values)
             {
                 Add(item);
             }
         }
-
-        /// <summary>
-        /// Bu methot çalıştırılır ise ağac komple silinecektir
-        /// </summary>
         public void Clear()
         {
             Clear(Root); //kok almadan silme işlemi olduğu için rekürsif olmaz ondan böyle bişey yapıldı
+            Root = null; //ustekı rootu sılmez burada tamamen sildik
         }
         private void Clear(IBinaryNode<T> Root)
         {
@@ -107,33 +91,75 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                 Root.Right = null; //sil
             }
         }
-        /// <summary>
-        /// Ağacın en küçük değerini verir
-        /// </summary>
-        /// <returns></returns>
         public T FindMin()
         {
             var current = Root;
-            while (current.Left!=null) //sol taraf null olana kadar ılerle
+            while (current.Left != null) //sol taraf null olana kadar ılerle
             {
                 current = current.Left;//curentı bı sola at
             }
             return current.Value; //currentın valusunu gonder
         }
-        public List<INode<T>> FindRootAll(T value)
+
+
+        protected List<IBinaryNode<T>> findRootAlllist = new();
+        public List<IBinaryNode<T>> FindRootAll(T value)
         {
-            throw new NotImplementedException();
+            if (value == null) throw new ArgumentNullException();
+            return FindRootAll(Root, value);
+        }
+        protected List<IBinaryNode<T>> FindRootAll(IBinaryNode<T> Root, T value)
+        {
+            var current = Root;
+            while (value.CompareTo(current.Value) != 0) //eşit değil ise gir
+            {
+                if (value.CompareTo(current.Value) < 0)//-1 küçük deger kucuk ıse sola gıdıcez
+                {
+                    current = current.Left;
+                }
+                else if (value.CompareTo(current.Value) > 0) //deger buyuk ıse saga gıdıcez
+                {
+                    current = current.Right;
+                }
+                if (current == null)
+                {
+                    return null;
+                }
+            }
+            findRootAlllist.Add(current); //listeye ekle bu nodu
+            FindRootAll(current.Right, value); //ekleme işleminde eşit olanları sağa eklemıiştık bulunanın sagına git dedik
+            return findRootAlllist; //listeyi döndük
         }
 
         public INode<T> FindRootDepht(T value)
         {
-            throw new NotImplementedException();
+            var data = FindRootAll(value);
+            data.Reverse(); //en sonu alabilmek için yaptık
+            return data[0];
         }
 
         public INode<T> FindRootFirst(T value)
         {
-            throw new NotImplementedException();
+            if(value == null) throw new ArgumentNullException();
+            var current = Root;
+            while (value.CompareTo(current.Value) != 0) //eşit değil ise gir
+            {
+                if (value.CompareTo(current.Value) < 0)//-1 küçük deger kucuk ıse sola gıdıcez
+                {
+                    current = current.Left;
+                }
+                else if (value.CompareTo(current.Value) > 0) //deger buyuk ıse saga gıdıcez
+                {
+                    current = current.Right;
+                }
+                if (current == null)
+                {
+                    return null;
+                }
+            }
+            return current;
         }
+
         public void ToDrawAllPaths()
         {
             throw new NotImplementedException();

@@ -10,13 +10,26 @@ namespace Trees.BinaryTrees
 {
     public interface IBinaryTreeBase<T> where T : IComparable
     {
-        void Add(T value); 
+        /// <summary>
+        /// Verilen T tipindeki değeri ağaca uygun şekilde ekler
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        void Add(T value);
+        /// <summary>
+        /// Gelen T Listesindeki elemanları uygun yerlere yerleştirir
+        /// </summary>
+        /// <param name="values"></param>
         void AddRange(List<T> values);
         void Remove(INode<T> value);
         void Remove(T value);
         void RemoveAll(T value);
         void RemoveAll(INode<T> value);
+
         void RemoveRange(List<T> values);
+        /// <summary>
+        /// Bu methot çalıştırılır ise ağac komple silinecektir
+        /// </summary>
         void Clear();
 
     }
