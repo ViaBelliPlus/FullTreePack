@@ -86,27 +86,25 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
         public static List<IBinaryNode<T>> PostOrderNR(IBinaryNode<T> root)
         {
             // D-L-R
-            
-            var S = new Stack<IBinaryNode<T>>(); //bır yıgın olusturululur
-            if (root == null) //kok null ıse bos lıste don
+
+            if (root == null) throw new ArgumentNullException();
+            Stack<IBinaryNode<T>> s = new();
+            s.Push(root);
+            IBinaryNode<T> current = root;
+            while (s.Count > 0)
             {
-                return list;
-            }
-            S.Push(root); //yıgına koku ekle
-            while (S.Count != 0) //yıgının bos olmamalıdır 
-            {
-                var temp = S.Pop();//yıgının son eklenen elemanı cekılır
-                list.Add(temp); //listeye eklenır son eleman 
-                if (temp.Left != null) //sol trafı var ıse gır
+                current = s.Pop();
+                list.Add(current);
+                if (current.Right != null)
                 {
-                    S.Push(temp.Left); //sol tarafı yıgına eklenır
+                    s.Push(current.Right);
                 }
-                if (temp.Right != null) //sag tarafı var ıse gırer
+                if (current.Left != null)
                 {
-                    S.Push(temp.Right); //sag tarafı yıgına ekler
+                    s.Push(current.Left);
                 }
             }
-            return list; //listeyi doneriz
+            return list;
         }
 
 
@@ -124,7 +122,24 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
         }
         public static List<IBinaryNode<T>> LevelOrderNR(IBinaryNode<T> root)
         {
-            throw new NotImplementedException();
+            if (root == null) throw new ArgumentNullException();
+            Queue<IBinaryNode<T>> s = new();
+            s.Enqueue(root);
+
+            while (s.Count > 0)
+            {
+                var current = s.Dequeue();
+                list.Add(current);
+                if (current.Left != null)
+                {
+                    s.Enqueue(current.Left);
+                }
+                if (current.Right != null)
+                {
+                    s.Enqueue(current.Right);
+                }
+            }
+            return list;
         }
     }
 }

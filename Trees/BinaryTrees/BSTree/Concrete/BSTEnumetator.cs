@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Trees.BinaryTrees.BaseBT.Concrete;
 using Trees.BinaryTrees.Node.Abstract;
 
 namespace Trees.BinaryTrees.BSTree.Concrete
@@ -6,29 +7,31 @@ namespace Trees.BinaryTrees.BSTree.Concrete
     internal class BSTEnumetator<T> : IEnumerator<T> where T : IComparable
     {
         public List<IBinaryNode<T>> list;
-        public int index=-1;
+        public int index = -1;
         public BSTEnumetator(IBinaryNode<T> root)
         {
-           // gelinecek
+            list = BinaryTree<T>.LevelOrder(root).ToList();
+            index++;
         }
 
-        public T Current => throw new NotImplementedException();
+        public T Current => list[index].Value;
 
-        object IEnumerator.Current => throw new NotImplementedException();
+        object IEnumerator.Current => Current;
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            list = null;
         }
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            index++;
+            return index < list.Count ? true : false;
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            index = -1;
         }
     }
 }
