@@ -9,7 +9,7 @@ using Trees.BinaryTrees.Node.Abstract;
 
 namespace Trees.BinaryTrees.BBTree.Concrete
 {
-    public partial class BBT<T> : IBinaryBalanceTree<T> where T : IComparable
+    public partial class BBT<T> /*: IBinaryBalanceTree<T>*/ where T : IComparable
     {
         public IResult Add(T value)
         {
@@ -61,7 +61,7 @@ namespace Trees.BinaryTrees.BBTree.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<T> RightRotation()
+        public T RightRotation()
         {
             throw new NotImplementedException();
         }
