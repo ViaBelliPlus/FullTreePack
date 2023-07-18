@@ -12,8 +12,8 @@ namespace Trees.BinaryTrees.BSTree.Abstract
     {
         T FindMax();
         T FindMin();
-        T MaxDepht();
-        INode<T> DeepNode();
+        int MaxDepht(IBinaryNode<T> root);
+        INode<T> DeepNode(IBinaryNode<T> root);
         void ToDrawAllPaths();
         INode<T> FindPath(INode<T> findedRoot);
         INode<T> FindRootDepht(T value);

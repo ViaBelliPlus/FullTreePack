@@ -11,14 +11,31 @@ namespace Trees.BinaryTrees.BSTree.Concrete
 {
     public partial class BST<T> : IBinarySearchTree<T> where T : IComparable
     {
-        public INode<T> DeepNode()
+        public INode<T> DeepNode(IBinaryNode<T> root)
         {
-            throw new NotImplementedException();
+            var ptr = Root;
+            while(ptr.Right != null && ptr.Left != null)
+            {
+                int rightDepht = MaxDepht(root.Right);
+                int leftDepht = MaxDepht(ptr.Left);
+                if(rightDepht < leftDepht)
+                {
+                    ptr = ptr.Left;
+                }
+                else
+                {
+                    ptr = ptr.Right;
+                }
+            }
+            return ptr;
         }
 
         public T FindMax()
         {
-            throw new NotImplementedException();
+            Validate(Root);
+            var ptr = Root;
+            while (ptr.Right != null) { ptr = ptr.Right; }
+            return ptr.Right.Value;
         }
 
         public bool FindRoot(INode<T> node)
@@ -30,9 +47,13 @@ namespace Trees.BinaryTrees.BSTree.Concrete
             throw new NotImplementedException();
         }
         
-        public T MaxDepht()
+        public int MaxDepht(IBinaryNode<T> root)
         {
-            throw new NotImplementedException();
+            if (root == null) return 0;
+            int leftDepht = MaxDepht(root.Left);
+            int rightDepht = MaxDepht(root.Right);
+
+            return (leftDepht > rightDepht) ? leftDepht + 1: rightDepht + 1;
         }
 
         public void Remove(INode<T> value)
@@ -52,6 +73,14 @@ namespace Trees.BinaryTrees.BSTree.Concrete
         public void RemoveRange(List<T> values)
         {
             throw new NotImplementedException();
+        }
+        private void Validate(object? obj)
+        {
+            if(obj == null) throw new ArgumentNullException(nameof(obj));
+        }
+        private void Validate(object? obj,object? obj2)
+        {
+            if(obj == null || obj2 == null) throw new ArgumentNullException(nameof(obj2));
         }
     }
 }
