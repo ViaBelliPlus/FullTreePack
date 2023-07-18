@@ -250,10 +250,15 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                 // Durum 3: İki çocuklu düğüm
                 else
                 {
-                    var successor = FindMinimum(root.Right); // Sağ alt ağacın en küçük değerli düğümü bul
+                    var successor = FindMinimum(root.Right); // Sağ alt ağacın en küçük değerli düğümü bul cunku sıstemı tek o bozmaz
 
-                    root.Value = successor.Value; // Silinecek düğümün değerini kucukdeger ile güncelle
-                    root.Right = DeleteNode(root.Right, successor.Value); // degeri değiştirileni agacın kokunu kuculterek sileriz çünkü asıl sılınmek ıstenılenın altındak min değeri bulduk ve onun değerini ona kopyaladık aynı gederden 2 tane var o yuzden 
+                    //root.Value = successor.Value; // Silinecek düğümün değerini kucukdeger ile güncelle
+                    //root.Right = DeleteNode(root.Right, successor.Value); // degeri değiştirileni agacın kokunu kuculterek sileriz çünkü asıl sılınmek ıstenılenın altındak min değeri bulduk ve onun değerini ona kopyaladık aynı gederden 2 tane var o yuzden
+
+                    successor.Left = root.Left;
+                    successor.Right = root.Right;
+                    root = successor;
+                    successor = null;
                 }
             }
 
