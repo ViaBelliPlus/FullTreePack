@@ -201,23 +201,12 @@ namespace Trees.BinaryTrees.BSTree.Concrete
 
         public void RemoveAll(T value)
         {
-             //Yanlışlıkla bunu yazmışım istersen sil başka bir algo kullan!
-            //Validate(value);
-            //var S = new Stack<IBinaryNode<T>>();
-            //foreach (var item in FindRootAll(value))
-            //{
-            //    S.Push(item);
-            //}
-            //foreach (IBinaryNode<T> item in S)
-            //{
-            //    Remove(item);
-            //}
             while (true)
             {
                 var data = FindRootFirst(value);
                 if (data != null)
                 {
-                    DeleteNode(Root, value);
+                    RemoveFirst(value);
                 }
                 else
                 {
@@ -225,7 +214,8 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                 }
             }
         }
-
+        /*
+        #region Sadık Remove
         private IBinaryNode<T> DeleteNode(IBinaryNode<T> root, T value)
         {
             if (root == null)
@@ -275,7 +265,8 @@ namespace Trees.BinaryTrees.BSTree.Concrete
 
             return root;
         }
-
+        #endregion
+        */
         private IBinaryNode<T> FindMinimum(IBinaryNode<T> node)
         {
             while (node.Left != null)
