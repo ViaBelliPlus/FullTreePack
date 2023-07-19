@@ -9,12 +9,12 @@ namespace Trees.Trie._Node.Concrate
 {
     public class SearchNode : Trie, ISearchTrei
     { //Sadık
-        public List<ITrie> ContainsCompletedWord(string word)
+        public List<string> ContainsCompletedWord(string word)
         {
             throw new NotImplementedException();
         }
 
-        public List<ITrie> HistoricalData()
+        public List<string> HistoricalData()
         {
             throw new NotImplementedException();
         }

@@ -17,5 +17,14 @@ namespace Trees.Trie._Node.Concrate
         {
             throw new NotImplementedException();
         }
+        public void CurseRemove(List<string> word)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CurseRemove(List<char> characters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,12 +24,12 @@ namespace Trees.Trie.SearchEngineTree.Concrete
             throw new NotImplementedException();
         }
 
-        public List<string> Past()
-        {
-            throw new NotImplementedException();
-        }
-
-
+        public List<string> Past() => Node.HistoricalData();
+        public void PastRemove(string word) => Node.Remove(word);
+        public void PastRemove(char character) => Node.Remove(character);
+        public void PastRemove(List<string> word) => Node.RemoveRange(word);
+        public void PastRemove(List<char> characters) => Node.Remove(characters);
+        public List<string> Search(string word) => Node.ContainsCompletedWord(word);
     }
 
 

@@ -13,12 +13,12 @@ namespace Trees.Trie._Node.Abstract
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
-        List<ITrie> ContainsCompletedWord(string word);
+        List<string> ContainsCompletedWord(string word);
         /// <summary>
         /// İlgili ağaçtaki layıtların hepsini getirir
         /// </summary>
         /// <returns></returns>
-        List<ITrie> HistoricalData();
+        List<string> HistoricalData();
 
     }
 }
