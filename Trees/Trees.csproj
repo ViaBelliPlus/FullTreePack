@@ -9,10 +9,6 @@
   <ItemGroup>
     <Folder Include="BinaryTrees\AVLTree\Concrete\" />
     <Folder Include="BinaryTrees\AVLTree\Abstract\" />
-    <Folder Include="Trie\CurseFindTree\Abstract\" />
-    <Folder Include="Trie\CurseFindTree\Concrete\" />
-    <Folder Include="Trie\SearchEngineTree\Abstract\" />
-    <Folder Include="Trie\SearchEngineTree\Concrete\" />
   </ItemGroup>
 
   <ItemGroup>
