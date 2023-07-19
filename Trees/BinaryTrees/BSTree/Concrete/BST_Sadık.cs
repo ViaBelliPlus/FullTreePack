@@ -206,7 +206,7 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                 var data = FindRootFirst(value);
                 if (data != null)
                 {
-                    DeleteNode(Root, value);
+                    RemoveFirst(value);
                 }
                 else
                 {
@@ -214,7 +214,8 @@ namespace Trees.BinaryTrees.BSTree.Concrete
                 }
             }
         }
-
+        /*
+        #region Sadık Remove
         private IBinaryNode<T> DeleteNode(IBinaryNode<T> root, T value)
         {
             if (root == null)
@@ -266,7 +267,8 @@ namespace Trees.BinaryTrees.BSTree.Concrete
 
             return root;
         }
-
+        #endregion
+        */
         private IBinaryNode<T> FindMinimum(IBinaryNode<T> node)
         {
             while (node.Left != null)

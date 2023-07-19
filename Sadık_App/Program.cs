@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Channels;
+﻿using System.Threading.Channels;
 using Trees.BinaryTrees.BaseBT.Concrete;
 using Trees.BinaryTrees.BSTree.Concrete;
 using Trees.BinaryTrees.Node.Concrete;
