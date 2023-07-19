@@ -20,9 +20,10 @@ s.Add(65);
 s.Add(115);
 s.Add(55);
 
-var a = s.FindRootDepht(90);
 
-BinaryTree<int>.LevelOrderNR(s.Root).ForEach(i => Console.Write($"{i,-5}"));
+s.RemoveAll(90);
+
+BinaryTree<int>.InOrderNR(s.Root).ForEach(i=>Console.Write($"{i,-5}"));
 
 Console.WriteLine();
 
