@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Trees.BinaryTrees.BSTree.Abstract;
-using Trees.BinaryTrees.Node.Abstract;
+using Trees.BinaryTrees.BaseBT;
+using Trees.BinaryTrees.BSTree;
+using Trees.BinaryTrees.Node;
 
 namespace Trees.BinaryTrees.BSTree.Concrete
 {
@@ -173,6 +174,46 @@ namespace Trees.BinaryTrees.BSTree.Concrete
         private void Validate(object? obj, object? obj2)
         {
             if (obj == null || obj2 == null) throw new ArgumentNullException(nameof(obj2));
+        }
+
+        public List<IBinaryNode<T>> LevelOrder()
+        {
+            return BinaryTree<T>.LevelOrder(Root);
+        }
+
+        public List<IBinaryNode<T>> PreOrder()
+        {
+            return BinaryTree<T>.PreOrder(Root);
+        }
+
+        public List<IBinaryNode<T>> PostOrder()
+        {
+            return BinaryTree<T>.PostOrder(Root);
+        }
+
+        public List<IBinaryNode<T>> InOrder()
+        {
+            return BinaryTree<T>.InOrder(Root);
+        }
+
+        public List<IBinaryNode<T>> LevelOrderNR()
+        {
+            return BinaryTree<T>.LevelOrderNR(Root);
+        }
+
+        public List<IBinaryNode<T>> PreOrderNR()
+        {
+            return BinaryTree<T>.PreOrderNR(Root);
+        }
+
+        public List<IBinaryNode<T>> PostOrderNR()
+        {
+            return BinaryTree<T>.PostOrderNR(Root);
+        }
+
+        public List<IBinaryNode<T>> InOrderNR()
+        {
+            return BinaryTree<T>.InOrderNR(Root);
         }
     }
 }

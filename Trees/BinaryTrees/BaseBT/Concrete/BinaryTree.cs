@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Trees.BinaryTrees.Node.Abstract;
+using Trees.BinaryTrees.Node;
 
-namespace Trees.BinaryTrees.BaseBT.Concrete
+namespace Trees.BinaryTrees.BaseBT
 {
-    public static class BinaryTree<T> where T : IComparable
+    public static class BinaryTree<T>
     {
         public static List<IBinaryNode<T>> list;
         static BinaryTree()
@@ -20,13 +20,13 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
-        public static List<IBinaryNode<T>> InOrder(IBinaryNode<T> root)
+        private static List<IBinaryNode<T>> InOrderAlgorithm(IBinaryNode<T> root)
         {
-            if (root!=null)
+            if (root != null)
             {
-                InOrder(root.Left);
+                InOrderAlgorithm(root.Left);
                 list.Add(root);
-                InOrder(root.Right);
+                InOrderAlgorithm(root.Right);
             }
             return list;
         }
@@ -36,7 +36,7 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
         /// <param name="root"></param>
         /// <returns></returns>
         public static List<IBinaryNode<T>> InOrderNR(IBinaryNode<T> root)
-        { 
+        {
             var stcak = new Stack<IBinaryNode<T>>(); //bir stack yapısı kullanmamız gerekir
             IBinaryNode<T> currentNode = root; //temp deger
             bool done = false;//kontrol saglıycak bıze 
@@ -68,24 +68,59 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
-        public static List<IBinaryNode<T>> PostOrder(IBinaryNode<T> root)
+        private static List<IBinaryNode<T>> PostOrderAlgorithm(IBinaryNode<T> root)
+        {
+            if (root != null)
+            {
+                PostOrderAlgorithm(root.Left);
+                PostOrderAlgorithm(root.Right);
+                list.Add(root);
+            }
+            return list;
+        }
+        
+        public static List<IBinaryNode<T>> PostOrderNR(IBinaryNode<T> root)
+        {
+            if (root == null) throw new ArgumentException();
+            Stack<IBinaryNode<T>> stack = new Stack<IBinaryNode<T>>();
+            stack.Push(root);
+            IBinaryNode<T> prev = null; //Listeye giren son eleman
+            while (stack.Count > 0)
+            {
+                var temp = stack.Peek();
+                if((temp.Right == null && temp.Left == null) || (prev != null && (temp.Left == prev || temp.Right == prev)))
+                {
+                    list.Add(temp);
+                    stack.Pop();
+                    prev = temp;
+                    continue;
+                }
+                if(temp.Right != null)
+                {
+                    stack.Push(temp.Right);
+                }
+                if(temp.Left != null)
+                {
+                    stack.Push(temp.Left);
+                }
+            }
+            return list;
+        }
+
+
+        private static List<IBinaryNode<T>> PreOrderAlgorithm(IBinaryNode<T> root)
         {
             if (root != null)
             {
                 list.Add(root);
-                PostOrder(root.Left);
-                PostOrder(root.Right);
+                PreOrderAlgorithm(root.Left);
+                PreOrderAlgorithm(root.Right);
             }
             return list;
         }
-        /// <summary>
-        ///  PostOrder --> Data - Left - Right
-        /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
-        public static List<IBinaryNode<T>> PostOrderNR(IBinaryNode<T> root)
+        public static List<IBinaryNode<T>> PreOrderNR(IBinaryNode<T> root)
         {
-            // D-L-R
+            // D - L - R
 
             if (root == null) throw new ArgumentNullException();
             Stack<IBinaryNode<T>> s = new();
@@ -106,19 +141,24 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
             }
             return list;
         }
+        private static List<IBinaryNode<T>> LevelOrderAlgorithm(Queue<IBinaryNode<T>> values)
+        {
+            if (values.Count > 0)
+            {
+                IBinaryNode<T> temp = values.Dequeue();
+                list.Add(temp);
+                if (temp.Left != null)
+                {
+                    values.Enqueue(temp.Left);
+                }
+                if (temp.Right != null)
+                {
+                    values.Enqueue(temp.Right);
+                }
+                LevelOrderAlgorithm(values);
+            }
 
-
-        public static List<IBinaryNode<T>> PreOrder(IBinaryNode<T> root)
-        {
-            throw new NotImplementedException();
-        }
-        public static List<IBinaryNode<T>> PreOrderNR(IBinaryNode<T> root)
-        {
-            throw new NotImplementedException();
-        }
-        public static List<IBinaryNode<T>> LevelOrder(IBinaryNode<T> root)
-        {
-            throw new NotImplementedException();
+            return list;
         }
         public static List<IBinaryNode<T>> LevelOrderNR(IBinaryNode<T> root)
         {
@@ -141,5 +181,42 @@ namespace Trees.BinaryTrees.BaseBT.Concrete
             }
             return list;
         }
+        public static List<IBinaryNode<T>> LevelOrder(IBinaryNode<T> root)
+        {
+            if (list.Count > 0) Clear(list);
+            Queue<IBinaryNode<T>> temp = new();
+            temp.Enqueue(root);
+            return LevelOrderAlgorithm(temp);
+        }
+        /// <summary>
+        ///  PostOrder --> Data - Left - Right
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static List<IBinaryNode<T>> PreOrder(IBinaryNode<T> root)
+        {
+            if (list.Count > 0) Clear(list);
+            return PreOrderAlgorithm(root);
+        }
+        public static List<IBinaryNode<T>> PostOrder(IBinaryNode<T> root)
+        {
+            if (list.Count > 0) Clear(list);
+            return PostOrderAlgorithm(root);
+        }
+        public static List<IBinaryNode<T>> InOrder(IBinaryNode<T> root)
+        {
+            if (list.Count > 0) Clear(list);
+            return InOrderAlgorithm(root);
+        }
+        private static int Series(int i, int n)
+        {
+            int toplam = 0;
+            for (; i <= n; i++)
+            {
+                toplam += (int)MathF.Pow(2, i);
+            }
+            return toplam;
+        }
+        private static void Clear(List<IBinaryNode<T>> list) => list.Clear();
     }
 }

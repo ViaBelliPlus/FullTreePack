@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Trees.BinaryTrees.Node.Abstract;
+using Trees.BinaryTrees.Node;
 
-namespace Trees.BinaryTrees.BSTree.Abstract
+namespace Trees.BinaryTrees.BSTree
 {
     public interface IBinarySearchTree<T> : IBinaryTreeBase<T> where T : IComparable
     {

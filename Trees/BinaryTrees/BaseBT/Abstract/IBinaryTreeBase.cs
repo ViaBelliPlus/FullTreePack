@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Trees.BinaryTrees.Node.Abstract;
+using Trees.BinaryTrees.Node;
 
 namespace Trees.BinaryTrees
 {
-    public interface IBinaryTreeBase<T> where T : IComparable
+    public interface IBinaryTreeBase<T>
     {
         /// <summary>
         /// Verilen T tipindeki değeri ağaca uygun şekilde ekler
@@ -29,6 +29,14 @@ namespace Trees.BinaryTrees
         /// Bu methot çalıştırılır ise ağac komple silinecektir
         /// </summary>
         void Clear();
+        List<IBinaryNode<T>> LevelOrder();
+        List<IBinaryNode<T>> PreOrder();
+        List<IBinaryNode<T>> PostOrder();
+        List<IBinaryNode<T>> InOrder();
+        List<IBinaryNode<T>> LevelOrderNR();
+        List<IBinaryNode<T>> PreOrderNR();
+        List<IBinaryNode<T>> PostOrderNR();
+        List<IBinaryNode<T>> InOrderNR();
 
     }
 }

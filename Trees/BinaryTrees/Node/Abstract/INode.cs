@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trees.BinaryTrees.Node.Abstract
+namespace Trees.BinaryTrees.Node
 {
     public interface INode<T>
     {

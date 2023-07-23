@@ -7,10 +7,9 @@ using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using Trees.BinaryTrees.BaseBT.Concrete;
-using Trees.BinaryTrees.BSTree.Abstract;
-using Trees.BinaryTrees.Node.Abstract;
-using Trees.BinaryTrees.Node.Concrete;
+using Trees.BinaryTrees.BaseBT;
+using Trees.BinaryTrees.BSTree;
+using Trees.BinaryTrees.Node;
 
 namespace Trees.BinaryTrees.BSTree.Concrete
 {

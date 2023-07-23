@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using Trees.BinaryTrees.BaseBT.Concrete;
-using Trees.BinaryTrees.Node.Abstract;
+using Trees.BinaryTrees.BaseBT;
+using Trees.BinaryTrees.Node;
 
 namespace Trees.BinaryTrees.BSTree.Concrete
 {
@@ -10,7 +10,7 @@ namespace Trees.BinaryTrees.BSTree.Concrete
         public int index = -1;
         public BSTEnumetator(IBinaryNode<T> root)
         {
-            list = BinaryTree<T>.LevelOrder(root).ToList();
+            list = BinaryTree<T>.InOrderNR(root).ToList();
             index++;
         }
 

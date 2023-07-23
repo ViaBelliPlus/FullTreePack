@@ -1,6 +1,10 @@
 ﻿using Trees.BinaryTrees.BSTree.Concrete;
 BST<int> intss = new();
 intss.Add(11);
+intss.Add(10);
+intss.Add(9);
+intss.Add(12);
+var lists = intss.InOrderNR();
 BST<int> ints = new();
 ints.Add(100);
 ints.Add(220);
@@ -24,6 +28,10 @@ ints.Add(210);
 ints.Add(500);
 ints.Add(90);
 ints.Add(54);
+
+ints.ToDrawAllPaths();
+var list = ints.LevelOrder();
+
 #region DeepNode() Kontrol
 var deep = ints.DeepNode();
 #endregion

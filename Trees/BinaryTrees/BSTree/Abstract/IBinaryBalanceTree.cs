@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trees.BinaryTrees.BBTree.Abstract
+namespace Trees.BinaryTrees.BBTree
 {
     public interface IBinaryBalanceTree<T> : IBinaryTreeBase<T> where T : IComparable
     {

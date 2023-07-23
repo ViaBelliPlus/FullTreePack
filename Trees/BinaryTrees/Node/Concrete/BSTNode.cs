@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Trees.BinaryTrees.Node.Abstract;
+using Trees.BinaryTrees.Node;
 
-namespace Trees.BinaryTrees.Node.Concrete
+namespace Trees.BinaryTrees.Node
 {
     public class BSTNode<T>:IBinaryNode<T> where T : IComparable
     {
